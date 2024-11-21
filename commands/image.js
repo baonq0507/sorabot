@@ -40,6 +40,8 @@ module.exports = {
                     const url = chunk.match(/https:\/\/p16-official-plugin-sign-sg\.ibyteimg\.com\/[^"'\s]+/)[0]
                     if (url) {
                         reply.edit(`${url.replace("\\", "").replace(")", "")}`);
+                    } else {
+                        reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau! 👌 👌 👌");
                     }
                     break;
                 }
