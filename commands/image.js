@@ -5,11 +5,12 @@ module.exports = {
         .setName(NAMECOMMAND)
         .setDescription("Tạo ảnh với AI"),
     async execute(message, args) {
+        const reply = await message.reply("Notech đang xử lý, vui lòng chờ... 🤗 🤗 🤗");
 
         const content = message.content.replace(PREFIX + NAMECOMMAND, "");
-
-        const response = await fetch(`${COZEN_BASE_URL}`, {
-            method: "POST",
+        try {
+            const response = await fetch(`${COZEN_BASE_URL}`, {
+                method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${COZEN_API_KEY}`
@@ -27,22 +28,25 @@ module.exports = {
                 'max_tokens': 1000,
                 'temperature': 0.5,
                 'stream': true
-            })
-        });
+                })
+            });
+            const stream = response.body.getReader();
+            let chunk = "";
+            while (true) {
+                const { done, value } = await stream.read();
+                chunk += new TextDecoder().decode(value);
 
-        const stream = response.body.getReader();
-        let chunk = "";
-        while (true) {
-            const { done, value } = await stream.read();
-            chunk += new TextDecoder().decode(value);
-
-            if (done) {
-                const url = chunk.match(/https:\/\/p16-official-plugin-sign-sg\.ibyteimg\.com\/[^"'\s]+/)[0].replace(")\\", "");
-                if (url) {
-                    message.reply(url);
+                if (done) {
+                    const url = chunk.match(/https:\/\/p16-official-plugin-sign-sg\.ibyteimg\.com\/[^"'\s]+/)[0]
+                    if (url) {
+                        reply.edit(`${url.replace("\\", "").replace(")", "")}`);
+                    }
+                    break;
                 }
-                break;
             }
+        } catch (error) {
+            console.log(error);
+            reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau! 👌 👌 👌");
         }
     }
 };
