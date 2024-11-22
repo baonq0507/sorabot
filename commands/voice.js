@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const { PREFIX, VOICECOMMAND, VOICE_API_KEY, VOICE_BASE_URL, APP_NAME } = process.env;
+const { sleep } = require("../common");
 module.exports = {
     data: new SlashCommandBuilder().setName(VOICECOMMAND).setDescription("Tạo voice với AI"),
     async execute(message, args) {
@@ -19,16 +20,12 @@ module.exports = {
                 body: content
             });
             const data = await response.json();
-            console.log(data);
             if (data.async) {
-                console.log(data);
-                console.log(data.async);
-                // reply.edit(data.async);
-                //send file audio
+                await sleep(5000);
                 const audioResponse = await fetch(data.async);
                 const audioBuffer = await audioResponse.arrayBuffer();
                 const attachment = new AttachmentBuilder(Buffer.from(audioBuffer), { name: 'audio.mp3' });
-                await message.channel.send({ files: [attachment] });
+                await reply.edit({ files: [attachment] });
             } else {
                 reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau!");
             }
@@ -36,5 +33,7 @@ module.exports = {
             console.error(error);
             reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau!");
         }
-    }
+    },
+
+
 };
