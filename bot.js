@@ -4,7 +4,13 @@ const { TOKEN, PREFIX, TIMEOUT } = process.env;
 
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.GuildMessageReactions
+    ]
 });
 const fs = require("fs");
 const path = require("path");

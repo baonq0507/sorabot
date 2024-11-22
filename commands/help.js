@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND, TIMEOUT } = process.env;
+const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND, TIMEOUT, JOBCOMMAND, TASKCOMMAND, BALANCECOMMAND, ADD_BALANCE_COMMAND, TXCOMMAND } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("help")
@@ -11,7 +11,11 @@ module.exports = {
                 { name: "Lệnh tạo ảnh", value: `${PREFIX} ${NAMECOMMAND} <nội dung>` },
                 { name: "Lệnh chat", value: `${PREFIX} ${CHATCOMMAND} <nội dung>` },
                 { name: "Lệnh tạo voice", value: `${PREFIX} ${VOICECOMMAND} <nội dung>` },
-                { name: "Lệnh tài xỉu", value: `${PREFIX} ${TXCOMMAND} <tài/xỉu> <số tiền>` }
+                { name: "Lệnh tài xỉu", value: `${PREFIX} ${TXCOMMAND} <tài/xỉu> <số tiền>` },
+                { name: "Lệnh kiểm tra số dư", value: `${PREFIX} ${BALANCECOMMAND}` },
+                { name: "Lệnh thêm số dư", value: `${PREFIX} ${ADD_BALANCE_COMMAND} <số tiền>` },
+                { name: "Lệnh nhận công việc", value: `${PREFIX} ${JOBCOMMAND}` },
+                { name: "Lệnh làm việc", value: `${PREFIX} ${TASKCOMMAND}` }
             )
         message.reply({embeds: [embed]});
 
