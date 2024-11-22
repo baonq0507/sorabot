@@ -2,6 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { APP_NAME, TXCOMMAND } = process.env;
 const User = require('../models/user');
 const { sleep } = require('../common');
+const fs = require('fs');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(TXCOMMAND)
