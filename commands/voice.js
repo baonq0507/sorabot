@@ -25,7 +25,7 @@ module.exports = {
                 const audioResponse = await fetch(data.async);
                 const audioBuffer = await audioResponse.arrayBuffer();
                 const attachment = new AttachmentBuilder(Buffer.from(audioBuffer), { name: 'audio.mp3' });
-                await reply.edit({ files: [attachment] });
+                await reply.edit({ content: `${APP_NAME} đã xử lý thành công! 🎉 🎉 🎉`, files: [attachment] });
             } else {
                 reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau!");
             }
@@ -34,6 +34,4 @@ module.exports = {
             reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau!");
         }
     },
-
-
 };
