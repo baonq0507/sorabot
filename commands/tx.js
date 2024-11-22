@@ -30,9 +30,9 @@ module.exports = {
             return message.reply(randomLoiKhuyen);
         }
 
-        const dice1 = Math.floor(Math.random() * 6) + 1;
-        const dice2 = Math.floor(Math.random() * 6) + 1;
-        const dice3 = Math.floor(Math.random() * 6) + 1;
+        const dice1 = Math.floor(Math.random() * 6)
+        const dice2 = Math.floor(Math.random() * 6)
+        const dice3 = Math.floor(Math.random() * 6)
         const total = dice1 + dice2 + dice3;
 
         const result = total >= 11 ? (type.toLowerCase() === "tài" ? "Tài" : "TÀI") : (type.toLowerCase() === "xỉu" ? "Xỉu" : "XỈU");
