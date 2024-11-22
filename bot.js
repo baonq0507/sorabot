@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { TOKEN, PREFIX } = process.env;
+const { TOKEN, PREFIX, TIMEOUT } = process.env;
 
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const client = new Client({
@@ -30,7 +30,11 @@ client.on("messageCreate", async (message) => {
         await command.execute(message, args);
     } catch (error) {
         console.error(error);
-        message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕");
+        const reply = await message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕");
+
+        setTimeout(() => {
+            reply.delete();
+        }, TIMEOUT);
     }
 });
 

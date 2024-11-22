@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND } = process.env;
+const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND, TIMEOUT } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("help")
@@ -13,5 +13,9 @@ module.exports = {
                 { name: "Lệnh tạo voice", value: `${PREFIX} ${VOICECOMMAND} <nội dung>` }
             )
         message.reply({embeds: [embed]});
+
+        setTimeout(() => {
+            message.delete();
+        }, TIMEOUT);
     }
 };

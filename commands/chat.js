@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { PREFIX, CHATCOMMAND, CHAT_API_KEY } = process.env;
+const { PREFIX, CHATCOMMAND, CHAT_API_KEY, TIMEOUT } = process.env;
 const { OpenAI } = require('openai');
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,5 +23,9 @@ module.exports = {
             return;
         };
         reply.edit(`\`\`\`${response}\`\`\``);
+
+        setTimeout(() => {
+            reply.delete();
+        }, TIMEOUT);
     }
 };

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
-const { PREFIX, VOICECOMMAND, VOICE_API_KEY, VOICE_BASE_URL, APP_NAME } = process.env;
+const { PREFIX, VOICECOMMAND, VOICE_API_KEY, VOICE_BASE_URL, APP_NAME, TIMEOUT } = process.env;
 const { sleep } = require("../common");
 module.exports = {
     data: new SlashCommandBuilder().setName(VOICECOMMAND).setDescription("Tạo voice với AI"),
@@ -33,5 +33,8 @@ module.exports = {
             console.error(error);
             reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau!");
         }
+        setTimeout(() => {
+            reply.delete();
+        }, TIMEOUT);
     },
 };

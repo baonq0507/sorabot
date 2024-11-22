@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { PREFIX, NAMECOMMAND, COZEN_BASE_URL, COZEN_API_KEY, APP_NAME } = process.env;
+const { PREFIX, NAMECOMMAND, COZEN_BASE_URL, COZEN_API_KEY, APP_NAME, TIMEOUT } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(NAMECOMMAND)
@@ -50,5 +50,8 @@ module.exports = {
             console.log(error);
             reply.edit("Đã xảy ra lỗi, vui lòng thử lại sau! 👌 👌 👌");
         }
+        setTimeout(() => {
+            reply.delete();
+        }, TIMEOUT);
     }
 };
