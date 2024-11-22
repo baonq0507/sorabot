@@ -35,7 +35,7 @@ module.exports = {
         const dice3 = Math.floor(Math.random() * 6)
         const total = dice1 + dice2 + dice3;
 
-        const result = total >= 11 ? (type.toLowerCase() === "tài" ? "Tài" : "TÀI") : (type.toLowerCase() === "xỉu" ? "Xỉu" : "XỈU");
+        const result = total >= 11 ? 'tài' : 'xỉu';
 
         const reply = await message.reply(`${APP_NAME} đang xử lý kết quả, vui lòng chờ... 🤗 🤗 🤗`);
 
