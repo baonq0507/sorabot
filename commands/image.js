@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { PREFIX, NAMECOMMAND, COZEN_BASE_URL, COZEN_API_KEY } = process.env;
+const { PREFIX, NAMECOMMAND, COZEN_BASE_URL, COZEN_API_KEY, APP_NAME } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(NAMECOMMAND)
         .setDescription("Tạo ảnh với AI"),
     async execute(message, args) {
-        const reply = await message.reply("Notech đang xử lý, vui lòng chờ... 🤗 🤗 🤗");
+        const reply = await message.reply(`${APP_NAME} đang xử lý, vui lòng chờ... 🤗 🤗 🤗`);
 
         const content = message.content.replace(PREFIX + NAMECOMMAND, "");
         try {
