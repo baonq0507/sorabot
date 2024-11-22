@@ -10,7 +10,8 @@ module.exports = {
             .addFields(
                 { name: "Lệnh tạo ảnh", value: `${PREFIX} ${NAMECOMMAND} <nội dung>` },
                 { name: "Lệnh chat", value: `${PREFIX} ${CHATCOMMAND} <nội dung>` },
-                { name: "Lệnh tạo voice", value: `${PREFIX} ${VOICECOMMAND} <nội dung>` }
+                { name: "Lệnh tạo voice", value: `${PREFIX} ${VOICECOMMAND} <nội dung>` },
+                { name: "Lệnh tài xỉu", value: `${PREFIX} ${TXCOMMAND} <tài/xỉu> <số tiền>` }
             )
         message.reply({embeds: [embed]});
 

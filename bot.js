@@ -1,4 +1,5 @@
 require("dotenv").config();
+require('./database/mongodb');
 const { TOKEN, PREFIX, TIMEOUT } = process.env;
 
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
