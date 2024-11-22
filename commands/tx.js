@@ -1,10 +1,10 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { APP_NAME } = process.env;
+const { APP_NAME, TXCOMMAND } = process.env;
 const User = require('../models/user');
 const { sleep } = require('../common');
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("tx")
+        .setName(TXCOMMAND)
         .setDescription("Tài xỉu với AI"),
     async execute(message, args) {
         if (args.length !== 2) return message.reply("Vui lòng nhập đúng cú pháp! 🤨 🤨 🤨");
