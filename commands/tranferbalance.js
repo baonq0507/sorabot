@@ -12,6 +12,10 @@ module.exports = {
     async execute(message, args) {
         const user = message.mentions.users.first();
         const amount = parseInt(args[1]);
+        if (isNaN(amount) || amount <= 0) {
+            await message.reply('Số tiền không hợp lệ! Vui lòng nhập số tiền lớn hơn 0! 💰 💰 💰');
+            return;
+        }
 
         if (user.id === message.author.id) {
             await message.reply('Bạn không thể chuyển tiền cho chính mình!');
