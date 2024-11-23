@@ -29,7 +29,18 @@ module.exports = {
         }
 
         const rod = FishingRod.find(rod => rod.name === user.fishingRod);
-        const fish = rod.fish[Math.floor(Math.random() * rod.fish.length)];
+        // Get total chance
+        const totalChance = rod.fish.reduce((sum, fish) => sum + fish.chance, 0);
+
+        // Generate random number between 0 and total chance
+        const random = Math.random() * totalChance;
+
+        // Find fish based on chance
+        let currentChance = 0;
+        const fish = rod.fish.find(fish => {
+            currentChance += fish.chance;
+            return random <= currentChance;
+        });
 
         user.balance += fish.price;
         user.lastFishTime = now;
