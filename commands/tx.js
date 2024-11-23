@@ -17,7 +17,11 @@ module.exports = {
 
         let user = await User.findOne({ discordId });
         if (!user) {
-            user = await User.create({ discordId });
+            user = await User.create({ discordId, displayName: message.author.displayName });
+        }
+        if (user.displayName === '') {
+            user.displayName = message.author.displayName;
+            await user.save();
         }
 
         const balance = user.balance;

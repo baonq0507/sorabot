@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     job: { type: String, default: 'none' },
     jobTime: { type: Number, default: 0 },
     lastTaskTime: { type: Date, default: new Date(Date.now() - 31 * 60 * 1000) },
+    displayName: { type: String, default: '' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);
