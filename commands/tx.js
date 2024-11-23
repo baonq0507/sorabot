@@ -58,8 +58,7 @@ module.exports = {
             )
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
         const diceImages = [dot1, dot2, dot3, dot4, dot5, dot6];
-        const selectedDice = [dice1, dice2, dice3].map(value => diceImages[value - 1]);
-        await reply.edit({ content: `${APP_NAME} đã xử lý kết quả! 🎉 🎉 🎉`, files: selectedDice, embeds: [embed] });
+        await reply.edit({ content: `${APP_NAME} đã xử lý kết quả! 🎉 🎉 🎉`, embeds: [embed] });
 
         if (result === type) {
             user.balance += amount;

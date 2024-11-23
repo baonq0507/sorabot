@@ -63,7 +63,7 @@ module.exports = {
                     reward: 1500
                 }
             ],
-            symbol: '👨‍⚕️',
+            emoji: '👨‍⚕️',
             description: 'Bác sĩ là một nghề nghiệp đòi hỏi sự chính xác và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -93,7 +93,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🏫',
+            emoji: '👨‍🏫',
             description: 'Giáo viên là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -123,7 +123,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💻',
+            emoji: '👨‍💻',
             description: 'Kỹ sư phần mềm là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -171,7 +171,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🍳',
+            emoji: '👨‍🍳',
             description: 'Đầu bếp là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -221,7 +221,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🔧',
+            emoji: '👨‍🔧',
             description: 'Thợ sửa xe là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -258,7 +258,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💼',
+            emoji: '👨‍💼',
             description: 'Nhân viên văn phòng là một nghề nghiệp đòi hỏi sự chính xác và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -322,7 +322,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 }
             ],
-            symbol: '👨‍🔌',
+            symbol: '⚡',
             description: 'Thợ điện là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -372,7 +372,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👷‍♂️',
+            emoji: '👷‍♂️',
             description: 'Thợ xây dựng là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -422,7 +422,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💼',
+            emoji: '👨‍💼',
             description: 'Nhân viên bán hàng là một nghề nghiệp đòi hỏi sự chính xác và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -472,7 +472,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🚗',
+            emoji: '🚗',
             description: 'Tài xế là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -503,7 +503,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🎨',
+            emoji: '👨‍🎨',
             description: 'Nhà thiết kế là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
 
         },
@@ -550,7 +550,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💼',
+            emoji: '👨‍💼',
             description: 'Kế toán là một nghề nghiệp đòi hỏi sự chính xác và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -586,7 +586,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍⚖️',
+            emoji: '👨‍⚖️',
             description: 'Luật sư là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -622,7 +622,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💬',
+            emoji: '📰',
             description: 'Nhà báo là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -648,7 +648,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🎥',
+            emoji: '📸',
             description: 'Nhiếp ảnh gia là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -698,7 +698,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🔧',
+            emoji: '👨‍🔧',
             description: 'Thợ may là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -734,7 +734,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍💇',
+            emoji: '👨‍💇',
             description: 'Thợ làm tóc là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -778,7 +778,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🌾',
+            emoji: '👨‍🌾',
             description: 'Nông dân là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -822,7 +822,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🚢',
+            emoji: '⚓',
             description: 'Thủy thủ là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -857,7 +857,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍🎣',
+            emoji: '🎣',
             description: 'Câu cá là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -902,7 +902,7 @@ module.exports = {
                 },
 
             ],
-            symbol: '👨‍💻',
+            emoji: '👨‍💻',
             description: 'Streamer là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -946,7 +946,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👨‍♂️',
+            emoji: '👷‍♀️',
             description: 'Công nhân là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
@@ -981,7 +981,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            symbol: '👩‍❤️‍👨',
+            emoji: '👩‍❤️‍👨',
             description: 'Làm vợ là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         }
     ]
