@@ -652,56 +652,6 @@ module.exports = {
             description: 'Nhiếp ảnh gia là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
-            name: 'Thợ may',
-            time: 10,
-            task: [
-                {
-                    task: {
-                        name: 'May áo',
-                        descriptions: [
-                            'Bạn may áo không hợp lý, bị phản hồi',
-                            'Bạn may áo như cc',
-                            'Bạn may áo rất hợp lý, bạn đúng là 1 thợ may tai hại',
-                            'Bạn may áo ngon quá bạn ơi!',
-                            'Bạn may áo ngon quá bạn ơi!',
-                            'Bạn may áo ngon quá bạn ơi!'
-                        ]
-                    },
-                    reward: Math.floor(Math.random() * 7001) + 3000
-                },
-                {
-                    task: {
-                        name: 'May quần',
-                        descriptions: [
-                            'Bạn may quần không hợp lý, bị phản hồi',
-                            'Bạn may quần như cc',
-                            'Bạn may quần rất hợp lý, bạn đúng là 1 thợ may tai hại',
-                            'Bạn may quần ngon quá bạn ơi!',
-                            'Bạn may quần ngon quá bạn ơi!',
-                            'Bạn may quần ngon quá bạn ơi!'
-                        ]
-                    },
-                    reward: Math.floor(Math.random() * 7001) + 3000
-                },
-                {
-                    task: {
-                        name: 'May vá',
-                        descriptions: [
-                            'Bạn may vá không hợp lý, bị phản hồi',
-                            'Bạn may vá như cc',
-                            'Bạn may vá rất hợp lý, bạn đúng là 1 thợ may tai hại',
-                            'Bạn may vá ngon quá bạn ơi!',
-                            'Bạn may vá ngon quá bạn ơi!',
-                            'Bạn may vá ngon quá bạn ơi!'
-                        ]
-                    },
-                    reward: Math.floor(Math.random() * 7001) + 3000
-                },
-            ],
-            emoji: '👨‍🔧',
-            description: 'Thợ may là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
-        },
-        {
             name: 'Thợ làm tóc',
             time: 10,
             task: [
@@ -734,7 +684,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 },
             ],
-            emoji: '👨‍💇',
+            emoji: '💇',
             description: 'Thợ làm tóc là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
