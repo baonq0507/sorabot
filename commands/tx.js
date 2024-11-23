@@ -53,6 +53,14 @@ module.exports = {
         const dot4 = new AttachmentBuilder('https://i.ibb.co/hWdNNLg/4-dots.png', { name: '4_dots.png' });
         const dot5 = new AttachmentBuilder('https://i.ibb.co/KjD1btJ/5-dots.png', { name: '5_dots.png' });
         const dot6 = new AttachmentBuilder('https://i.ibb.co/z5z281C/6-dots.png', { name: '6_dots.png' });
+
+
+        if (result === type) {
+            user.balance += amount;
+        } else {
+            user.balance -= amount;
+        }
+        await user.save();
         const embed = new EmbedBuilder()
             .setTitle(`Kết quả: ${result} ${dice1DotSymbol} ${dice2DotSymbol} ${dice3DotSymbol}`)
             .setColor(result === type ? "Green" : "Red")
@@ -63,12 +71,5 @@ module.exports = {
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
         const diceImages = [dot1, dot2, dot3, dot4, dot5, dot6];
         await reply.edit({ content: `${APP_NAME} đã xử lý kết quả! 🎉 🎉 🎉`, embeds: [embed] });
-
-        if (result === type) {
-            user.balance += amount;
-        } else {
-            user.balance -= amount;
-        }
-        await user.save();
     }
 };
