@@ -35,7 +35,13 @@ module.exports = {
         }
         const task = jobInfo.task;
         const taskRandom = task[Math.floor(Math.random() * task.length)];
+
         user.lastTaskTime = new Date();
+        if (user.balance < 0) {
+            user.balance = 0;
+        }
+        user.balance += taskRandom.reward;
+
         await user.save();
         await message.reply(`Bạn đã làm việc ${taskRandom.task.name}! Nhận lương ${formatNumber(taskRandom.reward)}`);
     }
