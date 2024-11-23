@@ -11,7 +11,7 @@ module.exports = {
         .addIntegerOption(option => option.setName('amount').setDescription('Số tiền').setRequired(true)),
     async execute(message, args) {
         const user = message.mentions.users.first();
-        const amount = parseInt(args[1]);
+        const amount = parseInt(args[0]);
         if (isNaN(amount) || amount <= 0) {
             await message.reply('Số tiền không hợp lệ! Vui lòng nhập số tiền lớn hơn 0! 💰 💰 💰');
             return;
