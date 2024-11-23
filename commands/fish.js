@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const User = require('../models/user');
 const { FishingRod } = require('../fish');
-const { PREFIX, SHOPCOMMAND } = process.env;
+const { PREFIX, SHOPCOMMAND, THUMBNAIL } = process.env;
 const { formatNumber } = require('../common');
 const FISHCOMMAND = 'fish';
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
                 { name: 'Cá bạn vừa câu được', value: `${fish.emoji} ${fish.name}`, inline: false },
                 { name: 'Giá trị', value: formatNumber(fish.price), inline: false },
                 { name: 'Số dư', value: formatNumber(user.balance), inline: false },
-            )
+            ).setThumbnail(THUMBNAIL);
         await message.reply({ embeds: [embed] });
     }
 }
