@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     jobTime: { type: Number, default: 0 },
     lastTaskTime: { type: Date, default: new Date(Date.now() - 31 * 60 * 1000) },
     displayName: { type: String, default: '' },
+    fishingRod: { type: String, default: 'none' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

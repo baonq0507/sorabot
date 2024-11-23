@@ -47,13 +47,6 @@ module.exports = {
         const dice1DotSymbol = dice1 === 1 ? "⚀" : dice1 === 2 ? "⚁" : dice1 === 3 ? "⚂" : dice1 === 4 ? "⚃" : dice1 === 5 ? "⚄" : "⚅";
         const dice2DotSymbol = dice2 === 1 ? "⚀" : dice2 === 2 ? "⚁" : dice2 === 3 ? "⚂" : dice2 === 4 ? "⚃" : dice2 === 5 ? "⚄" : "⚅";
         const dice3DotSymbol = dice3 === 1 ? "⚀" : dice3 === 2 ? "⚁" : dice3 === 3 ? "⚂" : dice3 === 4 ? "⚃" : dice3 === 5 ? "⚄" : "⚅";
-        const dot1 = new AttachmentBuilder('https://i.ibb.co/2g0ShmP/1-dot.png', { name: '1_dots.png' });
-        const dot2 = new AttachmentBuilder('https://i.ibb.co/h84Z7zF/2-dots.png', { name: '2_dots.png' });
-        const dot3 = new AttachmentBuilder('https://i.ibb.co/f8xhgV3/3-dots.png', { name: '3_dots.png' });
-        const dot4 = new AttachmentBuilder('https://i.ibb.co/hWdNNLg/4-dots.png', { name: '4_dots.png' });
-        const dot5 = new AttachmentBuilder('https://i.ibb.co/KjD1btJ/5-dots.png', { name: '5_dots.png' });
-        const dot6 = new AttachmentBuilder('https://i.ibb.co/z5z281C/6-dots.png', { name: '6_dots.png' });
-
 
         if (result === type) {
             user.balance += amount;
@@ -69,7 +62,6 @@ module.exports = {
                 { name: '💵 Số tiền sau khi cược:', value: `${formatNumber(user.balance)}` },
             )
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
-        const diceImages = [dot1, dot2, dot3, dot4, dot5, dot6];
         await reply.edit({ content: `${APP_NAME} đã xử lý kết quả! 🎉 🎉 🎉`, embeds: [embed] });
     }
 };
