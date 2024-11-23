@@ -6,9 +6,9 @@ const { formatNumber } = require('../common');
 module.exports = {
     data: new SlashCommandBuilder().setName(BALANCECOMMAND).setDescription("Xem số dư của bạn"),
     async execute(message, args) {
-        const user = await User.findOne({ discordId: message.author.id });
+        let user = await User.findOne({ discordId: message.author.id });
         if (!user) {
-            return message.reply("Bạn không có số dư! 💸 💸 💸");
+            user = await User.create({ discordId: message.author.id });
         }
         message.reply(`Số dư của bạn là: ${formatNumber(user.balance)} 💸 💸 💸`);
     }
