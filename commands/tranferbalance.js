@@ -41,7 +41,7 @@ module.exports = {
             )
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
 
-        await message.reply(`Bạn đã chuyển ${formatNumber(amount)} cho ${user.displayName}`, { embeds: [embed] });
+        await message.reply({ content: `Bạn đã chuyển ${formatNumber(amount)} cho ${user.displayName} 💰 💰 💰`, embeds: [embed] });
     }
 
 }
