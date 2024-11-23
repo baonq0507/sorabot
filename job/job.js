@@ -322,7 +322,7 @@ module.exports = {
                     reward: Math.floor(Math.random() * 7001) + 3000
                 }
             ],
-            symbol: '⚡',
+            emoji: '⚡',
             description: 'Thợ điện là một nghề nghiệp đòi hỏi sự kiên nhẫn và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
         },
         {
