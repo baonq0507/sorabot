@@ -20,7 +20,7 @@ module.exports = {
             .setDescription(`Chào mừng bạn đến với shop ${APP_NAME}`)
             .addFields(
                 { name: 'Số dư', value: formatNumber(user.balance), inline: false },
-                ...FishingRod.map(rod => ({ name: `${rod.emoji} ${rod.name}`, value: rod.description, inline: false }))
+                ...FishingRod.map(rod => ({ name: `${rod.emoji} ${rod.name}`, value: `${rod.description}\nGiá: ${formatNumber(rod.price)}`, inline: false }))
             )
             .setThumbnail(THUMBNAIL);
         const reply = await message.reply({ embeds: [embed] });

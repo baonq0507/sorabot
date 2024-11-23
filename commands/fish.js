@@ -19,11 +19,20 @@ module.exports = {
             return;
         }
 
-        const rod = FishingRod.find(rod => rod.name === user.fishingRod);
+        // Check if 5 seconds have passed since last fish
+        const now = new Date();
+        const timeSinceLastFish = now - user.lastFishTime;
+        if (timeSinceLastFish < 5000) {
+            const timeLeft = Math.ceil((5000 - timeSinceLastFish) / 1000);
+            await message.reply(`Bạn cần đợi ${timeLeft}s nữa để câu cá tiếp!`);
+            return;
+        }
 
+        const rod = FishingRod.find(rod => rod.name === user.fishingRod);
         const fish = rod.fish[Math.floor(Math.random() * rod.fish.length)];
 
         user.balance += fish.price;
+        user.lastFishTime = now;
         await user.save();
 
         const embed = new EmbedBuilder()
