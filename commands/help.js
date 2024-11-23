@@ -18,7 +18,8 @@ module.exports = {
                 { name: "Lệnh bầu cua", value: `${PREFIX} ${BAUCUACOMMAND} <số tiền>` },
                 { name: "Lệnh chuyển tiền", value: `${PREFIX} ${TRANFERBALANCECOMMAND} <@user> <số tiền>` },
                 { name: "Lệnh câu cá", value: `${PREFIX} ${FISHINGCOMMAND}` },
-                { name: "Lệnh mua cần câu", value: `${PREFIX} ${SHOPCOMMAND}` }
+                { name: "Lệnh mua cần câu", value: `${PREFIX} ${SHOPCOMMAND}` },
+                { name: "Lệnh thông tin số tài khoản Sora", value: `${PREFIX} stk` }
             )
         message.reply({embeds: [embed]});
 
