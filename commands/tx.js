@@ -66,7 +66,7 @@ module.exports = {
             .setColor(result === type ? "Green" : "Red")
             .setDescription(`Bạn đã ${result === type ? "thắng" : "thua"} ${result === type ? '+' : '-'} ${amount} 💸 💸 💸`)
             .addFields(
-                { name: '💵 Số tiền còn lại', value: `${formatNumber(user.balance)}` },
+                { name: '💵 Số tiền sau khi cược:', value: `${formatNumber(user.balance)}` },
             )
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
         const diceImages = [dot1, dot2, dot3, dot4, dot5, dot6];
