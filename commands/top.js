@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const User = require('../models/user');
+const { formatNumber } = require('../common');
 const { TOPCOMMAND } = process.env;
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
         const users = await User.find({ displayName: { $ne: '' } }).sort({ balance: -1 }).limit(10);
 
         const embed = new EmbedBuilder()
-            .setTitle('Top người chơi có số tiền nhiều nhất')
+            .setTitle('Top Phú Ông, Phú Bà')
             .setColor('Blue')
             .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
             .addFields(
