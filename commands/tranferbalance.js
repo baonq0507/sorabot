@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { PREFIX, TRANFERBALANCECOMMAND } = process.env;
 const { formatNumber } = require('../common');
 const User = require('../models/user');
