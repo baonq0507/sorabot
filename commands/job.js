@@ -20,34 +20,36 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('Nhận công việc')
                 .addFields(
-                    ...jobList.job.map(job => ({ name: `${job.symbol} ${job.name}`, value: job.description }))
+                    ...jobList.job.map(job => ({ name: `${job.emoji} ${job.name}`, value: job.description }))
                 )
-            const reply = await message.reply({ embeds: [embed] });
+                .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
+            const reply = await message.reply({ content: `${APP_NAME} đã gửi công việc cho bạn! 🤗 🤗 🤗`, embeds: [embed] });
 
             for (const job of jobList.job) {
-                await reply.react(job.symbol);
+                await reply.react(job.emoji);
             }
 
             const filter = (reaction, user) => {
-                return jobList.job.some(j => j.symbol === reaction.emoji.name) && user.id === message.author.id;
+                return jobList.job.some(j => j.emoji === reaction.emoji.name) && user.id === message.author.id;
             };
 
 
             const collector = reply.createReactionCollector({ filter, time: 60000 });
 
             collector.on('collect', async (reaction, user) => {
-                const selectedJob = jobList.job.find(j => j.symbol === reaction.emoji.name);
+                const selectedJob = jobList.job.find(j => j.emoji === reaction.emoji.name);
                 if (selectedJob) {
                     await User.updateOne({ discordId: message.author.id }, { $set: { job: selectedJob.name } });
-                    // await reply.edit(`Bạn đã chọn công việc ${selectedJob.name} ${selectedJob.symbol}. Hãy chăm chỉ làm việc nhé !`);
-                    await message.reply(`${message.author.username} đã chọn công việc ${selectedJob.name} ${selectedJob.symbol}. Hãy chăm chỉ làm việc nhé !`);
+                    // await reply.edit(`Bạn đã chọn công việc ${selectedJob.name} ${selectedJob.emoji}. Hãy chăm chỉ làm việc nhé !`);
+                    await message.reply(`${message.author.username} đã chọn công việc ${selectedJob.name} ${selectedJob.emoji}. Hãy chăm chỉ làm việc nhé !`);
                     collector.stop();
                 }
             });
         } else {
             const embed = new EmbedBuilder()
-                .setTitle(`Công việc hiện tại của ${message.member.displayName} là ${job} ${jobList.job.find(j => j.name === job).symbol}`)
-                .setColor('Blue');
+                .setTitle(`Công việc hiện tại của ${message.member.displayName} là ${job} ${jobList.job.find(j => j.name === job).emoji}`)
+                .setColor('Blue')
+                .setThumbnail('https://i.ibb.co/PzpqhNg/464364317-1044910207314456-4180777111429000799-n.jpg')
             await message.reply({ embeds: [embed] });
         }
     }
