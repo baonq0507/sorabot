@@ -13,6 +13,10 @@ module.exports = {
         }
 
         const amount = args[0] || 1000;
+        if (amount < 1000 || amount > user.balance) {
+            await message.reply('Số tiền cược phải lớn hơn 1000 và không được lớn hơn số tiền hiện tại! 💵 💵 💵');
+            return;
+        }
 
         const baucualist = [
             {
