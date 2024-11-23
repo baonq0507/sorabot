@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
-const { PREFIX, JOBCOMMAND } = process.env;
+const { PREFIX, JOBCOMMAND, APP_NAME } = process.env;
 
 module.exports = {
     data: new SlashCommandBuilder().setName(JOBCOMMAND).setDescription("Xem công việc hiện tại của bạn"),
