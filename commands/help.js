@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND, TIMEOUT, JOBCOMMAND, TASKCOMMAND, BALANCECOMMAND, TXCOMMAND, BAUCUACOMMAND, TRANFERBALANCECOMMAND, SHOPCOMMAND, FISHINGCOMMAND } = process.env;
+const { PREFIX, NAMECOMMAND, APP_NAME, CHATCOMMAND, VOICECOMMAND, TIMEOUT, JOBCOMMAND, TASKCOMMAND, BALANCECOMMAND, TXCOMMAND, BAUCUACOMMAND, TRANFERBALANCECOMMAND, SHOPCOMMAND, FISHINGCOMMAND, ODD_OR_EVEN_COMMAND } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("help")
@@ -19,7 +19,8 @@ module.exports = {
                 { name: "Lệnh chuyển tiền", value: `${PREFIX} ${TRANFERBALANCECOMMAND} <@user> <số tiền>` },
                 { name: "Lệnh câu cá", value: `${PREFIX} ${FISHINGCOMMAND}` },
                 { name: "Lệnh mua cần câu", value: `${PREFIX} ${SHOPCOMMAND}` },
-                { name: "Lệnh thông tin số tài khoản Sora", value: `${PREFIX} stk` }
+                { name: "Lệnh thông tin số tài khoản Sora", value: `${PREFIX} stk` },
+                { name: "Lệnh chẵn lẻ", value: `${PREFIX} ${ODD_OR_EVEN_COMMAND} <chẵn/lẻ> <số tiền>` }
             )
         message.reply({embeds: [embed]});
 
