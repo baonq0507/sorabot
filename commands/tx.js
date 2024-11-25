@@ -34,14 +34,53 @@ module.exports = {
             return message.reply(randomLoiKhuyen);
         }
 
-        const dice1 = Math.floor(Math.random() * 6) + 1;
-        const dice2 = Math.floor(Math.random() * 6) + 1;
-        const dice3 = Math.floor(Math.random() * 6) + 1;
-        const total = dice1 + dice2 + dice3;
+        // Tạo ngẫu nhiên với tỉ lệ thắng thấp hơn thua
+        const winChance = 0.4; // 40% cơ hội thắng
+        const playerWins = Math.random() < winChance;
+
+        // Điều chỉnh kết quả xúc xắc dựa trên kết quả đã định trước
+        let dice1, dice2, dice3, total;
+        if (type === 'tài') {
+            if (playerWins) {
+                // Tạo kết quả tài (>=11)
+                do {
+                    dice1 = Math.floor(Math.random() * 6) + 1;
+                    dice2 = Math.floor(Math.random() * 6) + 1;
+                    dice3 = Math.floor(Math.random() * 6) + 1;
+                    total = dice1 + dice2 + dice3;
+                } while (total < 11);
+            } else {
+                // Tạo kết quả xỉu (<11)
+                do {
+                    dice1 = Math.floor(Math.random() * 6) + 1;
+                    dice2 = Math.floor(Math.random() * 6) + 1;
+                    dice3 = Math.floor(Math.random() * 6) + 1;
+                    total = dice1 + dice2 + dice3;
+                } while (total >= 11);
+            }
+        } else { // type === 'xỉu'
+            if (playerWins) {
+                // Tạo kết quả xỉu (<11)
+                do {
+                    dice1 = Math.floor(Math.random() * 6) + 1;
+                    dice2 = Math.floor(Math.random() * 6) + 1;
+                    dice3 = Math.floor(Math.random() * 6) + 1;
+                    total = dice1 + dice2 + dice3;
+                } while (total >= 11);
+            } else {
+                // Tạo kết quả tài (>=11)
+                do {
+                    dice1 = Math.floor(Math.random() * 6) + 1;
+                    dice2 = Math.floor(Math.random() * 6) + 1;
+                    dice3 = Math.floor(Math.random() * 6) + 1;
+                    total = dice1 + dice2 + dice3;
+                } while (total < 11);
+            }
+        }
 
         const result = total >= 11 ? 'tài' : 'xỉu';
 
-        const reply = await message.reply(`${APP_NAME} đang xử lý kết quả, vui lòng chờ... 🤗 🤗 🤗`);
+        const reply = await message.reply(`${APP_NAME} đang xử lý kết quả, vui lòng chờ... 🤗 🤗 🤗` + (playerWins ? '🎉 🎉 🎉' : '💥 💥 💥'));
 
         await sleep(3000);
         const dice1DotSymbol = dice1 === 1 ? "⚀" : dice1 === 2 ? "⚁" : dice1 === 3 ? "⚂" : dice1 === 4 ? "⚃" : dice1 === 5 ? "⚄" : "⚅";

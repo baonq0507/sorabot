@@ -8,10 +8,13 @@ module.exports = {
         .setDescription('Chẵn lẻ'),
     async execute(message, args) {
         const oddorEven = args[0];
-        const amount = args[1];
+        const amount = parseInt(args[1]);
+        const luckyNumber = parseInt(args[2]);
 
-        console.log(amount, oddorEven);
         if (isNaN(amount) || amount < 0) return message.reply('Vui lòng nhập số tiền lớn hơn 0');
+        if (luckyNumber !== undefined) {
+            if (isNaN(luckyNumber) || luckyNumber < 0 || luckyNumber > 99) return message.reply('Vui lòng nhập số may mắn từ 0-99');
+        }
 
         let user = await User.findOne({ discordId: message.author.id });
         if (!user) {
@@ -38,22 +41,59 @@ module.exports = {
         const reply = await message.reply(`${APP_NAME} đang xử lý... Vui lòng chờ 🤗 🤗 🤗`);
         await sleep(3000);
 
+        // Tạo ngẫu nhiên với tỉ lệ thắng 40%
+        const winChance = 0.4;
+        const playerWins = Math.random() < winChance;
 
-        const number = Math.floor(Math.random() * 100);
+        let number;
+        if (oddorEven === 'chẵn') {
+            if (playerWins) {
+                // Tạo số chẵn
+                do {
+                    number = Math.floor(Math.random() * 100);
+                } while (number % 2 !== 0);
+            } else {
+                // Tạo số lẻ
+                do {
+                    number = Math.floor(Math.random() * 100);
+                } while (number % 2 === 0);
+            }
+        } else { // oddorEven === 'lẻ'
+            if (playerWins) {
+                // Tạo số lẻ
+                do {
+                    number = Math.floor(Math.random() * 100);
+                } while (number % 2 === 0);
+            } else {
+                // Tạo số chẵn
+                do {
+                    number = Math.floor(Math.random() * 100);
+                } while (number % 2 !== 0);
+            }
+        }
 
         const result = number % 2 === 0 ? 'chẵn' : 'lẻ';
+        let isWin = result === oddorEven;
 
-        const isWin = result === oddorEven;
+        // Thêm bonus nếu đoán đúng số
+        let multiplier = 1;
+        if (number === luckyNumber) {
+            multiplier = 7;
+        }
 
-        user.balance = isWin ? user.balance + amount : user.balance - amount;
+        const winAmount = isWin ? amount * multiplier : -amount;
+        user.balance += winAmount;
         await user.save();
 
         const embed = new EmbedBuilder()
             .setColor(isWin ? 'Green' : 'Red')
             .setTitle(`Kết quả: ${result}`)
-            .setDescription(`Bạn đã ${isWin ? 'thắng' : 'thua'} ${isWin ? '+' : '-'} ${formatNumber(amount)} 💸 💸 💸`)
+            .setDescription(`Bạn đã ${isWin ? 'thắng' : 'thua'} ${isWin ? '+' : '-'} ${formatNumber(Math.abs(winAmount))} 💸 💸 💸`)
             .addFields(
-                { name: 'Số may mắn', value: number.toString() },
+                { name: 'Số may mắn của bạn', value: luckyNumber.toString() },
+                { name: 'Số may mắn trúng thưởng', value: number.toString() },
+                { name: 'Nhân hệ số', value: multiplier.toString() },
+                { name: 'Tổng tiền trúng thưởng', value: formatNumber(winAmount) },
                 { name: 'Số tiền sau cược', value: formatNumber(user.balance) },
             )
             .setTimestamp()
