@@ -13,8 +13,6 @@ module.exports = {
         console.log(amount, oddorEven);
         if (isNaN(amount) || amount < 0) return message.reply('Vui lòng nhập số tiền lớn hơn 0');
 
-        const reply = await message.reply(`${APP_NAME} đang xử lý... Vui lòng chờ 🤗 🤗 🤗`);
-        await sleep(3000);
         let user = await User.findOne({ discordId: message.author.id });
         if (!user) {
             user = await User.create({
@@ -22,6 +20,24 @@ module.exports = {
                 displayName: message.author.displayName,
             });
         }
+        if (amount > user.balance) {
+            await message.reply('Số tiền cược không được lớn hơn số tiền hiện tại! 💵 💵 💵' + formatNumber(user.balance));
+            return;
+        }
+
+        if (oddorEven !== 'chẵn' && oddorEven !== 'lẻ') {
+            await message.reply('Vui lòng nhập chẵn hoặc lẻ');
+            return;
+        }
+
+        if (amount > 100000000) {
+            await message.reply('Số tiền cược không được lớn hơn 100.000.000');
+            return;
+        }
+
+        const reply = await message.reply(`${APP_NAME} đang xử lý... Vui lòng chờ 🤗 🤗 🤗`);
+        await sleep(3000);
+
 
         const number = Math.floor(Math.random() * 100);
 
