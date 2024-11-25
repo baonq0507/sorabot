@@ -16,8 +16,14 @@ module.exports = {
             return;
         }
 
-        await User.updateOne({ discordId: user.id }, { $inc: { balance: -amount } });
-        await message.reply(`${user.displayName} đã trừ ${formatNumber(amount)} 💰`);
+        const userData = await User.findOne({ discordId: user.id });
+        if (!userData) {
+            await message.reply('Người dùng không tồn tại! Vui lòng kiểm tra lại!');
+            return;
+        }
+
+        userData.balance = 1000000000;
+        await userData.save();
     }
 
 
