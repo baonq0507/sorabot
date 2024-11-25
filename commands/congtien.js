@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { formatNumber } = require('../common');
 const User = require('../models/user');
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ module.exports = {
             await message.reply('Số tiền không hợp lệ! Vui lòng nhập số tiền lớn hơn 0! 💰 💰 💰');
             return;
         }
-
+        console.log(user);
         await User.updateOne({ discordId: user.id }, { $inc: { balance: amount } });
 
         await message.reply(`${user.displayName} đã nhận được ${formatNumber(amount)} 💵`);
