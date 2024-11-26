@@ -61,7 +61,7 @@ client.on("messageCreate", async (message) => {
 
 client.once('ready', async () => {
     const channel = client.channels.cache.get(CHANNEL_ID_XS);
-    cron.schedule('18 6 * * *', async () => {
+    cron.schedule('20 6 * * *', async () => {
         if (channel) {
             const xsmb = await Xsmb.findOne({
                 time: {
