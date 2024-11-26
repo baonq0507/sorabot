@@ -20,7 +20,8 @@ module.exports = {
                 { name: "Lệnh câu cá", value: `${PREFIX} ${FISHINGCOMMAND}` },
                 { name: "Lệnh mua cần câu", value: `${PREFIX} ${SHOPCOMMAND}` },
                 { name: "Lệnh thông tin số tài khoản Sora", value: `${PREFIX} stk` },
-                { name: "Lệnh chẵn lẻ", value: `${PREFIX} ${ODD_OR_EVEN_COMMAND} <chẵn/lẻ> <số tiền> <số may mắn>` }
+                { name: "Lệnh chẵn lẻ", value: `${PREFIX} ${ODD_OR_EVEN_COMMAND} <chẵn/lẻ> <số tiền> <số may mắn>` },
+                { name: "Lệnh xổ số", value: `${PREFIX} ${'xoso'} <"00,01,..."> <số tiền>` }
             )
         message.reply({embeds: [embed]});
 
