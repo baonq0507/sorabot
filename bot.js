@@ -115,7 +115,7 @@ client.once('ready', async () => {
         });
     }
 
-    cron.schedule('0 0 * * *', async () => {
+    cron.schedule('0 12 6 * * *', async () => {
         if (channel) {
             const number = Math.floor(Math.random() * 100);
             await Xsmb.create({
