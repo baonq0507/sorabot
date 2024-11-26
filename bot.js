@@ -100,7 +100,22 @@ client.once('ready', async () => {
         }
     });
 
-    cron.schedule('0 6 * * *', async () => {
+    const xsmb = await Xsmb.findOne({
+        time: {
+            $gte: new Date(new Date().setHours(0, 0, 0, 0)),
+            $lt: new Date(new Date().setHours(23, 59, 59, 999))
+        }
+    });
+
+    if (!xsmb) {
+        await Xsmb.create({
+            number: Math.floor(Math.random() * 100).toString().padStart(2, '0'),
+            time: new Date(),
+            users: []
+        });
+    }
+
+    cron.schedule('0 0 * * *', async () => {
         if (channel) {
             const number = Math.floor(Math.random() * 100);
             await Xsmb.create({
