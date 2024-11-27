@@ -6,6 +6,8 @@ module.exports = {
         .setName('tops')
         .setDescription('Tops'),
     async execute(message) {
+
+        message.reply('🔄 Đang tính toán... ⌛');
         const channel = message.channel; // Kênh hiện tại
         // láy ra top 5 người nhắn tin nhiều nhất trong channel
         const options = { limit: 100 };
@@ -15,25 +17,6 @@ module.exports = {
 
         let lastMessageId = null;
         const userMessageCounts = new Map();
-
-        // const topUsers = Array.from(messages.values())
-        //     .filter(message =>
-        //         message.createdAt >= oneWeekAgo &&
-        //         message.createdAt <= today &&
-        //         !message.author.bot &&
-        //         !message.member?.roles.cache.some(role => role.name.toLowerCase().includes('bot'))
-        //     )
-        //     .reduce((acc, message) => {
-        //         const userId = message.author.id;
-        //         acc[userId] = (acc[userId] || 0) + 1;
-        //         return acc;
-        //     }, {});
-
-        // Sort users by message count in descending order
-        // const sortedTopUsers = Object.fromEntries(
-        //     Object.entries(topUsers)
-        //         .sort(([,a], [,b]) => b - a)
-        // );
 
         while (true) {
             const options = { limit: 100 }; // Discord cho phép tối đa 100 tin mỗi lần
