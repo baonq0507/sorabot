@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+
 const { THUMBNAIL } = process.env;
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,13 +25,19 @@ module.exports = {
                 return acc;
             }, {});
 
+        // Sort users by message count in descending order
+        const sortedTopUsers = Object.fromEntries(
+            Object.entries(topUsers)
+                .sort(([,a], [,b]) => b - a)
+        );
+
         const embed = new EmbedBuilder()
             .setTitle('👑 Tops 👑')
             .setDescription('🏆 Bảng xếp hạng người dùng hoạt động 🏆')
             .setColor('Blue')
             .addFields(
-                { name: '👤 Người dùng', value: Object.keys(topUsers).map(userId => `<@${userId}>`).join('\n'), inline: true },
-                { name: '💬 Số tin nhắn', value: Object.values(topUsers).join('\n'), inline: true }
+                { name: '👤 Người dùng', value: Object.keys(sortedTopUsers).map(userId => `<@${userId}>`).join('\n'), inline: true },
+                { name: '💬 Số tin nhắn', value: Object.values(sortedTopUsers).join('\n'), inline: true }
             )
             .setTimestamp()
             .setThumbnail(THUMBNAIL);
