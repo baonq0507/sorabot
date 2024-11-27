@@ -1,6 +1,6 @@
 require("dotenv").config();
 require('./database/mongodb');
-const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL } = process.env;
+const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL, CHANNEL_ID_EVENT } = process.env;
 const Xsmb = require("./models/xsmb");
 const User = require("./models/user");
 const { formatNumber } = require("./common");
