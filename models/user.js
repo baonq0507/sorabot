@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     displayName: { type: String, default: '' },
     fishingRod: { type: String, default: 'none' },
     lastFishTime: { type: Date, default: new Date(Date.now() - (31 * 60 - 5) * 1000) },
+    messageCount: { type: Number, default: 0 },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

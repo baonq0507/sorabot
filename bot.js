@@ -29,7 +29,6 @@ for (const file of commandFiles) {
 }
 
 client.on("messageCreate", async (message) => {
-
     // const whitelist = ["1082369606095740978", "1310313335060955206"];
     // const guild = message.guild;
     // if (!whitelist.includes(guild.id)) {
@@ -39,6 +38,19 @@ client.on("messageCreate", async (message) => {
     //     }, 1000);
     //     return;
     // }
+
+    let user = await User.findOne({ discordId: message.author.id });
+    if (!user) {
+        user = await User.create({ discordId: message.author.id, displayName: message.author.displayName });
+    }
+
+    if (message.channel.id === CHANNEL_ID_EVENT) {
+        if (!message.author.bot) {
+            user.messageCount += 1;
+            await user.save();
+        }
+    }
+
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
