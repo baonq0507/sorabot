@@ -8,36 +8,67 @@ module.exports = {
     async execute(message) {
         const channel = message.channel; // Kênh hiện tại
         // láy ra top 5 người nhắn tin nhiều nhất trong channel
-        const messages = await channel.messages.fetch();
+        const options = { limit: 100 };
+        const messages = await channel.messages.fetch(options);
         const today = new Date();
         const oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-        const topUsers = Array.from(messages.values())
-            .filter(message =>
-                message.createdAt >= oneWeekAgo &&
-                message.createdAt <= today &&
-                !message.author.bot &&
-                !message.member?.roles.cache.some(role => role.name.toLowerCase().includes('bot'))
-            )
-            .reduce((acc, message) => {
-                const userId = message.author.id;
-                acc[userId] = (acc[userId] || 0) + 1;
+        let lastMessageId = null;
+        const userMessageCounts = new Map();
+
+        // const topUsers = Array.from(messages.values())
+        //     .filter(message =>
+        //         message.createdAt >= oneWeekAgo &&
+        //         message.createdAt <= today &&
+        //         !message.author.bot &&
+        //         !message.member?.roles.cache.some(role => role.name.toLowerCase().includes('bot'))
+        //     )
+        //     .reduce((acc, message) => {
+        //         const userId = message.author.id;
+        //         acc[userId] = (acc[userId] || 0) + 1;
+        //         return acc;
+        //     }, {});
+
+        // Sort users by message count in descending order
+        // const sortedTopUsers = Object.fromEntries(
+        //     Object.entries(topUsers)
+        //         .sort(([,a], [,b]) => b - a)
+        // );
+
+        while (true) {
+            const options = { limit: 100 }; // Discord cho phép tối đa 100 tin mỗi lần
+            if (lastMessageId) options.before = lastMessageId;
+
+            const messages = await channel.messages.fetch(options);
+
+            if (messages.size === 0) break; // Dừng nếu không còn tin nhắn
+
+            // Đếm tin nhắn theo người dùng
+            messages.forEach((msg) => {
+                const userId = msg.author.id;
+                userMessageCounts.set(userId, (userMessageCounts.get(userId) || 0) + 1);
+            });
+
+            lastMessageId = messages.last().id; // Cập nhật ID tin nhắn cuối cùng
+        }
+
+        // sort userMessageCounts by value in descending order
+        const sortedUserMessageCounts = Array.from(userMessageCounts.entries())
+            .sort(([,a], [,b]) => b - a)
+            .reduce((acc, [userId, count]) => {
+                acc[userId] = count;
                 return acc;
             }, {});
 
-        // Sort users by message count in descending order
-        const sortedTopUsers = Object.fromEntries(
-            Object.entries(topUsers)
-                .sort(([,a], [,b]) => b - a)
-        );
+        console.log(sortedUserMessageCounts);
 
         const embed = new EmbedBuilder()
             .setTitle('👑 Tops 👑')
             .setDescription('🏆 Bảng xếp hạng người dùng hoạt động 🏆')
             .setColor('Blue')
             .addFields(
-                { name: '👤 Người dùng', value: Object.keys(sortedTopUsers).map(userId => `<@${userId}>`).join('\n'), inline: true },
-                { name: '💬 Số tin nhắn', value: Object.values(sortedTopUsers).join('\n'), inline: true }
+                { name: '👤 Người dùng', value: Object.keys(sortedUserMessageCounts).map(id => `<@${id}>`).join('\n'), inline: true },
+                { name: '💬 Số tin nhắn', value: Object.values(sortedUserMessageCounts).join('\n'), inline: true }
             )
             .setTimestamp()
             .setThumbnail(THUMBNAIL);
