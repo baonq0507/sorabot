@@ -49,9 +49,9 @@ module.exports = {
             connection.subscribe(player);
             player.play(resource);
 
-            // Lấy thông tin video
-            const videoInfo = await ytdl.getInfo(url);
-            const videoTitle = videoInfo.videoDetails.title;
+            // Lấy thông tin video từ play-dl thay vì ytdl
+            const videoInfo = await play.video_info(url);
+            const videoTitle = videoInfo.video_details.title;
 
             player.on('error', (error) => {
                 console.error(`Có lỗi xảy ra khi phát nhạc: ${error.message}`);
