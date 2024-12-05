@@ -6,7 +6,7 @@ module.exports = {
         .setName('tops')
         .setDescription('Tops'),
     async execute(message) {
-        const users = await User.find({}).sort({ messageCount: -1 }).limit(5);
+        const users = await User.find({}).sort({ messageCount: -1 }).limit(10);
         const embed = new EmbedBuilder()
             .setTitle('👑 Tops 👑')
             .setDescription('🏆 Bảng xếp hạng người dùng hoạt động 🏆')
