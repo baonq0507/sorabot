@@ -1,11 +1,7 @@
-//bot nghe nhạc
-
 const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 const { SlashCommandBuilder } = require("discord.js");
 const { PREFIX, NHACCOMMAND } = process.env;
 const ytdl = require("@distube/ytdl-core");
-
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(NHACCOMMAND)
@@ -17,7 +13,6 @@ module.exports = {
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             return message.reply('Link nhạc không hợp lệ!');
         }
-        console.log(url);
 
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) {
@@ -59,7 +54,5 @@ module.exports = {
             return message.reply('Could not play the requested music.');
         }
     },
-    async play(connection, url) {
-        connection.play(await ytdl(url), { type: 'opus' });
-    }
+
 }
