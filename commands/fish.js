@@ -54,5 +54,5 @@ module.exports = {
                 { name: 'Số dư', value: formatNumber(user.balance), inline: false },
             ).setThumbnail(THUMBNAIL);
         await message.reply({ embeds: [embed] });
-    }
+    },
 }
