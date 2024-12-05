@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
+<<<<<<< HEAD
     "@mapbox/node-pre-gyp": "^1.0.11",
+=======
+>>>>>>> 5d41827a322be758b189c0c2f9e6582310d19b48
     "chatgpt": "^5.2.5",
     "discord-player": "^6.7.1",
     "discord.js": "^14.16.3",
