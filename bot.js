@@ -5,14 +5,19 @@ const Xsmb = require("./models/xsmb");
 const User = require("./models/user");
 const { formatNumber } = require("./common");
 const { Client, GatewayIntentBits, Collection, EmbedBuilder } = require("discord.js");
+// const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.DirectMessageReactions,
-        GatewayIntentBits.GuildMessageReactions
-    ]
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences,
+    ],
 });
 const fs = require("fs");
 const path = require("path");
@@ -59,6 +64,9 @@ client.on("messageCreate", async (message) => {
         message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕");
         return;
     };
+    if (command.autocomplete) {
+        await command.autocomplete(message);
+    }
     try {
         await command.execute(message, args);
     } catch (error) {

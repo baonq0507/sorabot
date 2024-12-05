@@ -100,5 +100,10 @@ module.exports = {
             .setThumbnail(THUMBNAIL);
 
         await reply.edit({ content: `${APP_NAME} đã xử lý kết quả`, embeds: [embed] });
+    },
+    async autocomplete(interaction) {
+        const choices = ['chẵn', 'lẻ'];
+        const filtered = choices.filter(choice => choice.startsWith(interaction.options.getFocused()));
+        await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })));
     }
 }

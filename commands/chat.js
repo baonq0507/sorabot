@@ -10,16 +10,22 @@ module.exports = {
 
         const content = message.content.replace(PREFIX + CHATCOMMAND, "");
 
+        const GIRLFRIEND_SYSTEM_PROMPT = "Bạn là một cô gái trẻ, vui vẻ, hoạt bát và thân thiện. Hãy trả lời với phong cách của một cô gái như vậy và không có tính cách như người bạn trai. hãy nói chuyện với người dùng như một người bạn trai thân thiện và vui vẻ. với ngôn ngữ việt nam. Và từ nay bạn sẽ tên là S nhé";
+
+        const messageHistory = [{ role: "system", content: GIRLFRIEND_SYSTEM_PROMPT }];
+
         const openai = new OpenAI({
             apiKey: CHAT_API_KEY,
         });
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: content }],
+            messages: messageHistory,
         });
+        messageHistory.push({ role: "user", content: content });
+        messageHistory.push({ role: "assistant", content: completion.choices[0].message.content });
         const response = completion.choices[0].message.content;
         if (!response) {
-            reply.edit("Notech xủ lý không nổi nữa, thử lại sau... 😔 😔 😔");
+            reply.edit("S xủ lý không nổi nữa, thử lại sau... 😔 😔 😔");
             return;
         };
         reply.edit(`\`\`\`${response}\`\`\``);
