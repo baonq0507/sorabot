@@ -10,7 +10,7 @@ module.exports = {
     async execute(message) {
         // lấy tất cả người dùng trong channel
         // const users = await message.guild.members.fetch({ limit: 1000, withPresences: true });
-        const message = await message.reply('Đang lọc...');
+        const reply = await message.reply('Đang lọc...');
 
         // console.log(users);
         // lấy số lượng tin nhắn của người dùng
@@ -27,7 +27,7 @@ module.exports = {
             .setTimestamp()
             .setThumbnail(THUMBNAIL);
 
-        await message.edit({ embeds: [embed] });
+        await reply.edit({ embeds: [embed] });
     },
     async countMessagesInGuild(guild) {
         const userMessageCount = new Collection(); // Lưu trữ số lượng tin nhắn của từng người
