@@ -2,6 +2,8 @@ const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@d
 const { SlashCommandBuilder } = require("discord.js");
 const { PREFIX, NHACCOMMAND } = process.env;
 const ytdl = require("@distube/ytdl-core");
+const fs = require('fs');
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName(NHACCOMMAND)
@@ -29,22 +31,35 @@ module.exports = {
                 guildId: message.guild.id,
                 adapterCreator: message.guild.voiceAdapterCreator,
             });
+            const agentOptions = {
+                pipelining: 5,
+                maxRedirections: 0,
+                localAddress: "127.0.0.1",
+            };
+            const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")), agentOptions);
 
             const stream = ytdl(url, {
                 filter: 'audioonly',
-                highWaterMark: 1 << 25,
+                quality: 'highestaudio',
+                dlChunkSize: 0,
                 requestOptions: {
                     headers: {
                         'User-Agent': 'Mozilla/5.0',
                     },
                 },
-                quality: 'highestaudio',
+                agent: agent,
+                highWaterMark: 1 << 25,
+                dlChunkSize: 0,
             });
             const resource = createAudioResource(stream);
             const player = createAudioPlayer();
 
             connection.subscribe(player);
             player.play(resource);
+
+            if (connection.state.status === 'connected') {
+                connection.destroy();
+            }
 
             player.on('error', (error) => {
                 console.error(`Playback error: ${error}`);
