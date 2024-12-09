@@ -33,43 +33,23 @@ module.exports = {
             const stream = ytdl(url, {
                 filter: 'audioonly',
                 highWaterMark: 1 << 25,
-                quality: 'highestaudio',
                 requestOptions: {
                     headers: {
                         'User-Agent': 'Mozilla/5.0',
                     },
                 },
+                quality: 'highestaudio',
             });
-
-            const resource = createAudioResource(stream, {
-                inlineVolume: true,
-                inputType: 'opus'
-            });
+            const resource = createAudioResource(stream);
             const player = createAudioPlayer();
 
             connection.subscribe(player);
             player.play(resource);
 
-            // Handle stream end
-            player.on('stateChange', (oldState, newState) => {
-                if (newState.status === 'idle') {
-                    connection.destroy();
-                }
-            });
-
-            // Handle errors better
             player.on('error', (error) => {
                 console.error(`Playback error: ${error}`);
-                message.reply('An error occurred during playback.');
-                connection.destroy();
+                return message.reply('An error occurred during playback.');
             });
-
-            stream.on('error', (error) => {
-                console.error(`Stream error: ${error}`);
-                message.reply('An error occurred with the audio stream.');
-                connection.destroy();
-            });
-
         } catch (error) {
             console.error(`Unexpected error: ${error.message}`);
             return message.reply('Could not play the requested music.');
