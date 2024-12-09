@@ -19,7 +19,6 @@ module.exports = {
 
         // Convert Collection to array and sort by message count
         const sortedUsers = Array.from(userMessageCount.entries())
-            .filter(([userId, count]) => count < 20)
             .sort((a, b) => a[1] - b[1]);
 
         // Split into chunks of 10 users
