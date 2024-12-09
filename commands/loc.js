@@ -34,7 +34,9 @@ module.exports = {
                 .setColor('Blue')
                 .addFields(
                     { name: '👤 Người dùng', value: chunk.map(([userId]) => `<@${userId}>`).join('\n'), inline: true },
-                    { name: '💬 Số tin nhắn', value: chunk.map(([_, count]) => count).join('\n'), inline: true }
+                    { name: '💬 Số tin nhắn', value: chunk.map(([_, count]) => count).join('\n'), inline: true },
+                //status
+                    { name: '🔴 Trạng thái', value: chunk.map(([userId]) => `${guildMembers.get(userId).presence?.status}`).join('\n'), inline: true },
                 )
                 .setTimestamp()
                 .setThumbnail(THUMBNAIL);
