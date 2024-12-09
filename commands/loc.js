@@ -8,30 +8,29 @@ module.exports = {
         .setName('lọc')
         .setDescription('Lọc'),
     async execute(message) {
-        // lấy tất cả người dùng trong channel
-        // const users = await message.guild.members.fetch({ limit: 1000, withPresences: true });
         const reply = await message.reply('Đang lọc...');
 
-        // console.log(users);
-        // lấy số lượng tin nhắn của người dùng
+        // Lấy số lượng tin nhắn của người dùng
         const userMessageCount = await this.countMessagesInGuild(message.guild);
         console.log(userMessageCount);
 
-        // Convert Collection to array and sort by message count
-        const sortedUsers = Array.from(userMessageCount.entries())
+        // Lọc chỉ lấy người dùng còn trong guild
+        const guildMembers = await message.guild.members.fetch();
+        const filteredUsers = Array.from(userMessageCount.entries())
+            .filter(([userId]) => guildMembers.has(userId))
             .sort((a, b) => a[1] - b[1]);
 
         // Split into chunks of 10 users
         const chunks = [];
-        for (let i = 0; i < sortedUsers.length; i += 10) {
-            chunks.push(sortedUsers.slice(i, i + 10));
+        for (let i = 0; i < filteredUsers.length; i += 10) {
+            chunks.push(filteredUsers.slice(i, i + 10));
         }
 
         // Create embeds for each chunk
         const embeds = chunks.map((chunk, index) => {
             return new EmbedBuilder()
                 .setTitle(`👑 Lọc 👑 (Trang ${index + 1}/${chunks.length})`)
-                .setDescription('🏆 Bảng xếp hạng người dùng ít tin nhắn hơn 20 tin nhắn')
+                .setDescription('🏆 Bảng xếp hạng người dùng')
                 .setColor('Blue')
                 .addFields(
                     { name: '👤 Người dùng', value: chunk.map(([userId]) => `<@${userId}>`).join('\n'), inline: true },
@@ -68,7 +67,7 @@ module.exports = {
 
                 messages.forEach(message => {
                     const authorId = message.author.id;
-                    userMessageCount.set(authorId, `${message.author.displayName} - ${userMessageCount.get(authorId) || 0} tin nhắn`);
+                    userMessageCount.set(authorId, (userMessageCount.get(authorId) || 0) + 1);
                 });
 
                 lastId = messages.last().id; // Lấy ID của tin nhắn cuối để tiếp tục fetch
