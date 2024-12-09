@@ -16,18 +16,41 @@ module.exports = {
         // lấy số lượng tin nhắn của người dùng
         const userMessageCount = await this.countMessagesInGuild(message.guild);
         console.log(userMessageCount);
-        const embed = new EmbedBuilder()
-            .setTitle('👑 Lọc 👑')
-            .setDescription('🏆 Bảng xếp hạng người dùng ít tin nhắn hơn 20 tin nhắn')
-            .setColor('Blue')
-            .addFields(
-                { name: '👤 Người dùng', value: Array.from(userMessageCount.entries()).map(([userId, count]) => `<@${userId}>`).join('\n'), inline: true },
-                { name: '💬 Số tin nhắn', value: Array.from(userMessageCount.entries()).map(([userId, count]) => count).join('\n'), inline: true }
-            )
-            .setTimestamp()
-            .setThumbnail(THUMBNAIL);
 
-        await reply.edit({ embeds: [embed] });
+        // Convert Collection to array and sort by message count
+        const sortedUsers = Array.from(userMessageCount.entries())
+            .filter(([userId, count]) => count < 20)
+            .sort((a, b) => a[1] - b[1]);
+
+        // Split into chunks of 10 users
+        const chunks = [];
+        for (let i = 0; i < sortedUsers.length; i += 10) {
+            chunks.push(sortedUsers.slice(i, i + 10));
+        }
+
+        // Create embeds for each chunk
+        const embeds = chunks.map((chunk, index) => {
+            return new EmbedBuilder()
+                .setTitle(`👑 Lọc 👑 (Trang ${index + 1}/${chunks.length})`)
+                .setDescription('🏆 Bảng xếp hạng người dùng ít tin nhắn hơn 20 tin nhắn')
+                .setColor('Blue')
+                .addFields(
+                    { name: '👤 Người dùng', value: chunk.map(([userId]) => `<@${userId}>`).join('\n'), inline: true },
+                    { name: '💬 Số tin nhắn', value: chunk.map(([_, count]) => count).join('\n'), inline: true }
+                )
+                .setTimestamp()
+                .setThumbnail(THUMBNAIL);
+        });
+
+        // Send first embed
+        let currentPage = 0;
+        await reply.edit({ embeds: [embeds[currentPage]] });
+
+        // Send remaining embeds with delay
+        for (let i = 1; i < embeds.length; i++) {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
+            await reply.edit({ embeds: [embeds[i]] });
+        }
     },
     async countMessagesInGuild(guild) {
         const userMessageCount = new Collection(); // Lưu trữ số lượng tin nhắn của từng người
