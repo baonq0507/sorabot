@@ -44,12 +44,12 @@ module.exports = {
 
         // Send first embed
         let currentPage = 0;
-        await reply.edit({ embeds: [embeds[currentPage]] });
+        await message.channel.send({ embeds: [embeds[currentPage]] });
 
         // Send remaining embeds with delay
         for (let i = 1; i < embeds.length; i++) {
             await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
-            await reply.edit({ embeds: [embeds[i]] });
+            await message.channel.send({ embeds: [embeds[i]] });
         }
     },
     async countMessagesInGuild(guild) {
