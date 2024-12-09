@@ -69,7 +69,7 @@ module.exports = {
 
                 messages.forEach(message => {
                     const authorId = message.author.id;
-                    userMessageCount.set(authorId, (userMessageCount.get(authorId) || 0) + 1);
+                    userMessageCount.set(authorId, `${message.author.displayName} - ${userMessageCount.get(authorId) || 0} tin nhắn`);
                 });
 
                 lastId = messages.last().id; // Lấy ID của tin nhắn cuối để tiếp tục fetch
