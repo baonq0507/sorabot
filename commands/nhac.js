@@ -31,12 +31,6 @@ module.exports = {
                 guildId: message.guild.id,
                 adapterCreator: message.guild.voiceAdapterCreator,
             });
-            const agentOptions = {
-                pipelining: 5,
-                maxRedirections: 0,
-                localAddress: "127.0.0.1",
-            };
-            const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")), agentOptions);
 
             const stream = ytdl(url, {
                 filter: 'audioonly',
@@ -47,7 +41,6 @@ module.exports = {
                         'User-Agent': 'Mozilla/5.0',
                     },
                 },
-                agent: agent,
                 highWaterMark: 1 << 25,
                 dlChunkSize: 0,
             });
@@ -57,9 +50,6 @@ module.exports = {
             connection.subscribe(player);
             player.play(resource);
 
-            if (connection.state.status === 'connected') {
-                connection.destroy();
-            }
 
             player.on('error', (error) => {
                 console.error(`Playback error: ${error}`);

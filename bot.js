@@ -36,16 +36,6 @@ for (const file of commandFiles) {
 }
 
 client.on("messageCreate", async (message) => {
-    // const whitelist = ["1082369606095740978", "1310313335060955206"];
-    // const guild = message.guild;
-    // if (!whitelist.includes(guild.id)) {
-    //     message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕! Chỉ hỗ trợ trong máy chủ của Sora");
-    //     setTimeout(() => {
-    //         guild.leave();
-    //     }, 1000);
-    //     return;
-    // }
-
     let user = await User.findOne({ discordId: message.author.id });
     if (!user) {
         user = await User.create({ discordId: message.author.id, displayName: message.author.displayName });
@@ -149,5 +139,8 @@ client.once('ready', async () => {
     });
 
 });
-
-client.login(TOKEN);
+try {
+    client.login(TOKEN);
+} catch(error) {
+    console.log(`Lỗi ${error}`)
+}
