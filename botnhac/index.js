@@ -5,9 +5,6 @@ require('dotenv').config();
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
 
-client.on('ready', () => {
-    console.log(`Bot đã sẵn sàng, đăng nhập với tên: ${client.user.tag}`);
-});
 
 client.on('messageCreate', async (message) => {
     if (!message.guild) return;

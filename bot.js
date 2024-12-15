@@ -1,10 +1,10 @@
 require("dotenv").config();
 require('./database/mongodb');
-const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL, CHANNEL_ID_EVENT } = process.env;
+const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL, CHANNEL_ID_EVENT, CLIENT_ID, GUILD_ID } = process.env;
 const Xsmb = require("./models/xsmb");
 const User = require("./models/user");
 const { formatNumber } = require("./common");
-const { Client, GatewayIntentBits, Collection, EmbedBuilder } = require("discord.js");
+const { Client, GatewayIntentBits, Collection, EmbedBuilder, Events, REST, Routes } = require("discord.js");
 // const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
 
 const client = new Client({
@@ -25,119 +25,80 @@ const fs = require("fs");
 const path = require("path");
 const cron = require('node-cron');
 client.commands = new Collection();
-
-const commandsPath = path.join(__dirname, "commands");
+const commands = []
+const commandsPath = path.join(__dirname, "command3");
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
+
 
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
+    if ('data' in command && 'execute' in command) {
+        commands.push(command.data.toJSON());
+    } else {
+        console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+    }
     client.commands.set(command.name || command.data.name, command);
 }
 
-client.on("messageCreate", async (message) => {
-    let user = await User.findOne({ discordId: message.author.id });
-    if (!user) {
-        user = await User.create({ discordId: message.author.id, displayName: message.author.displayName });
-    }
+const rest = new REST().setToken(TOKEN);
 
-    if (message.channel.id === CHANNEL_ID_EVENT) {
-        if (!message.author.bot) {
-            user.messageCount += 1;
-            await user.save();
+// and deploy your commands!
+(async () => {
+	try {
+        console.log('Đang lấy tất cả các lệnh...');
+
+        // **Lấy tất cả lệnh toàn cầu**
+        const globalCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
+        console.log(`Tìm thấy ${globalCommands.length} lệnh toàn cầu.`);
+
+        // Xóa tất cả lệnh toàn cầu
+        for (const command of globalCommands) {
+            console.log(`Đang xóa lệnh toàn cầu: ${command.name} (${command.id})`);
+            await rest.delete(Routes.applicationCommand(CLIENT_ID, command.id));
         }
-    }
+        console.log('Tất cả lệnh toàn cầu đã bị xóa!');
 
-    if (!message.content.startsWith(PREFIX) || message.author.bot) return;
-    const args = message.content.slice(PREFIX.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
-    const command = client.commands.get(commandName);
-    if (!command) {
-        message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕");
-        return;
-    };
-    if (command.autocomplete) {
-        await command.autocomplete(message);
-    }
-    try {
-        await command.execute(message, args);
-    } catch (error) {
-        console.error(error);
-        const reply = await message.reply("Không hỗ trợ lệnh này! 🖕 🖕 🖕");
+        // **Lấy tất cả lệnh trong guild**
+        if (GUILD_ID) {
+            const guildCommands = await rest.get(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID));
+            console.log(`Tìm thấy ${guildCommands.length} lệnh trong server ID: ${GUILD_ID}.`);
 
-        setTimeout(() => {
-            reply.delete();
-        }, TIMEOUT);
-    }
-});
-
-client.once('ready', async () => {
-    const channel = client.channels.cache.get(CHANNEL_ID_XS);
-    cron.schedule('30 18 * * *', async () => {
-        if (channel) {
-            const xsmb = await Xsmb.findOne({
-                time: {
-                    $gte: new Date(new Date().setHours(0, 0, 0, 0)),
-                    $lt: new Date(new Date().setHours(23, 59, 59, 999))
-                }
-            });
-
-            const usersReward = xsmb.users.filter(user => user.numbers.includes(xsmb.number));
-            console.log(usersReward);
-
-            if (usersReward.length > 0) {
-                for (const user of usersReward) {
-
-                    const amount = user.amount;
-                    const userId = await User.findOne({ discordId: user.userId })
-                    userId.balance += amount * 70;
-                    await userId.save();
-                }
+            // Xóa tất cả lệnh trong guild
+            for (const command of guildCommands) {
+                console.log(`Đang xóa lệnh guild: ${command.name} (${command.id})`);
+                await rest.delete(Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, command.id));
             }
-            const embed = new EmbedBuilder()
-                .setTitle(`🎰 Kết quả xổ số hôm nay 🎰`)
-                .setDescription(`🎲 Số về: ${xsmb.number} 🎲`)
-                .addFields(
-                    { name: "🏆 Thưởng", value: `${usersReward.length} người trúng thưởng 🎉` },
-                    { name: "💰 Tổng thưởng", value: `${formatNumber(usersReward.reduce((acc, user) => acc + user.amount * 70, 0))} 💵`, inline: true },
-                    usersReward.length > 0 ?
-                        { name: "👑 Danh sách người trúng thưởng", value: usersReward.map(user => `<@${user.userId}> 💸 ${formatNumber(user.amount * 70)}`).join("\n") }
-                        :
-                        { name: "😢 Danh sách người trúng thưởng", value: "Không có người trúng thưởng ❌" }
-                )
-                .setColor(usersReward.length > 0 ? "Green" : "Red")
-                .setTimestamp()
-                .setThumbnail(THUMBNAIL)
-            channel.send({ embeds: [embed] });
+            console.log(`Tất cả lệnh trong server ID: ${GUILD_ID} đã bị xóa!`);
         }
-    });
+        
+		const data = await rest.put(
+			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			{ body: commands },
+		);
 
-    const xsmb = await Xsmb.findOne({
-        time: {
-            $gte: new Date(new Date().setHours(0, 0, 0, 0)),
-            $lt: new Date(new Date().setHours(23, 59, 59, 999))
-        }
-    });
+		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+	} catch (error) {
+		// And of course, make sure you catch and log any errors!
+		console.error(error);
+	}
+})();
+client.on(Events.InteractionCreate, async interaction => {    
+    if (!interaction.isChatInputCommand()) return;
 
-    if (!xsmb) {
-        await Xsmb.create({
-            number: Math.floor(Math.random() * 100).toString().padStart(2, '0'),
-            time: new Date(),
-            users: []
+    const command = interaction.client.commands.get(interaction.commandName)
+    
+    if (!command) return;
+
+    try {
+        await command.execute(interaction); // Thực thi lệnh tương ứng
+    } catch (error) {
+        console.error(`Lỗi khi thực thi lệnh ${interaction.commandName}:`, error);
+        await interaction.reply({
+            content: 'Đã xảy ra lỗi khi thực thi lệnh này.',
+            ephemeral: true, // Tin nhắn chỉ hiển thị với người dùng
         });
     }
-
-    cron.schedule('0 0 * * *', async () => {
-        if (channel) {
-            const number = Math.floor(Math.random() * 100);
-            await Xsmb.create({
-                number: number.toString().padStart(2, '0'),
-                time: new Date(),
-                users: []
-            });
-        }
-    });
-
 });
 try {
     client.login(TOKEN);
