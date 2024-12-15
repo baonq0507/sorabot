@@ -6,7 +6,7 @@ const banks = JSON.parse(fs.readFileSync('./banks.json', 'utf8')).data;
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('qr')
-        .setDescription('Thông tin số tài khoản')
+        .setDescription('Tạo QR của riêng bạn')
         .addStringOption(option => 
             option.setName('nganhang')
             .setDescription('Chọn ngân hàng của bạn')
