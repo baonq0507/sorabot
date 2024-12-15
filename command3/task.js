@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { TASKCOMMAND, PREFIX, JOBCOMMAND } = process.env;
+const { TASKCOMMAND, PREFIX, JOBCOMMAND, THUMBNAIL } = process.env;
 const { formatNumber } = require('../common');
 const User = require('../models/user');
 module.exports = {
@@ -19,7 +19,13 @@ module.exports = {
 
         const job = user.job;
         if (!job || job === 'none') {
-            await interaction.reply(`Bạn chưa có công việc nào! Hãy nhận công việc bằng lệnh: \`${PREFIX} ${JOBCOMMAND}\``);
+            const embed = new EmbedBuilder()
+                .setTitle('❌ Không có công việc')
+                .setDescription('Bạn chưa có công việc nào! Hãy nhận công việc của mình')
+                .setColor('Red')
+                .setThumbnail(THUMBNAIL)
+                .setTimestamp();
+            await interaction.reply({ embeds: [embed] });
             return;
         }
 
@@ -41,6 +47,7 @@ module.exports = {
                 .addFields(
                     { name: '💪 Lời khuyên', value: 'Hãy cố gắng nghỉ ngơi, giữ sức khỏe!' }
                 )
+                .setThumbnail(THUMBNAIL)
                 .setTimestamp();
             await interaction.reply({ embeds: [embed] });
             return;

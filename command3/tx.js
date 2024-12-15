@@ -26,7 +26,7 @@ module.exports = {
             ),
     
     async execute(interaction) {
-        const type = interaction.options.getString('chon');
+        const type = interaction.options.getString('taixiu');
         const amount = interaction.options.getInteger('tiencuoc');
 
         let user = await User.findOne({ discordId: interaction.user.id });
