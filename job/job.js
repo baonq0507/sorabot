@@ -643,10 +643,10 @@ module.exports = {
                     },
                     reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
                 },
-                {
-                    name: 'Chỉnh sửa ảnh',
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
-                },
+                // {
+                //     name: 'Chỉnh sửa ảnh',
+                //     reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                // },
             ],
             emoji: '📸',
             description: 'Nhiếp ảnh gia là một nghề nghiệp đòi hỏi sự sáng tạo và tập trung cao, nhưng cũng mang lại nhiều cơ hội thăng tiến và lương cao.'
