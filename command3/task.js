@@ -67,7 +67,7 @@ module.exports = {
             .setDescription(`${interaction.user.username} đã hoàn thành công việc!`)
             .setColor('Green')
             .addFields(
-                { name: '📋 Nhiệm vụ', value: taskRandom.task.name },
+                { name: '📋 Nhiệm vụ', value: taskRandom.name },
                 { name: '💰 Tiền lương', value: formatNumber(taskRandom.reward) },
                 { name: '💬 Phản hồi', value: taskRandom.task.descriptions[Math.floor(Math.random() * taskRandom.task.descriptions.length)] }
             )
