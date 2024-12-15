@@ -10,6 +10,9 @@ module.exports = {
         .setName(FISHCOMMAND)
         .setDescription('Câu cá'),
         async execute(interaction) {
+            // Defer the reply immediately for all interactions
+            await interaction.deferReply();
+
             let user = await User.findOne({ discordId: interaction.user.id });
             if (!user) {
                 user = await User.create({ discordId: interaction.user.id, displayName: interaction.user.displayName });
@@ -65,7 +68,7 @@ module.exports = {
                 .setColor('Green')
                 .setThumbnail(THUMBNAIL)
                 .setTimestamp();
-        
+
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
@@ -75,26 +78,34 @@ module.exports = {
                         .setEmoji('🎣')
                 );
         
-            const reply = await interaction.reply({ embeds: [embed] });
-        
-            // const collector = reply.createMessageComponentCollector({
-            //     filter: i => i.customId === 'fish_again' && i.user.id === interaction.user.id,
-            //     time: 60000,
-            // });
-        
-            // collector.on('collect', async i => {
-            //     await i.deferReply(); // Defer tương tác mới
-            //     const user = await User.findOne({ discordId: i.user.id }); // Lấy lại thông tin người dùng
-    
-            //     if (!user) {
-            //         await i.followUp('Không tìm thấy thông tin người dùng.');
-            //         return;
-            //     }
-            //     const command = interaction.client.commands.get(FISHCOMMAND);
-            //     if (command) {
-            //         await command.execute(i);
-            //     }
-            // });
+            const response = await interaction.editReply({ 
+                embeds: [embed],
+                components: [row]
+            });
+
+            const collector = response.createMessageComponentCollector({ 
+                time: 60000 
+            });
+
+            collector.on('collect', async i => {
+                if (i.user.id === interaction.user.id) {
+                    if (i.customId === 'fish_again') {
+                        await this.execute(i);
+                    }
+                } else {
+                    await i.reply({ 
+                        content: 'Bạn không thể sử dụng nút này!', 
+                        ephemeral: true 
+                    });
+                }
+            });
+
+            collector.on('end', () => {
+                row.components[0].setDisabled(true);
+                interaction.editReply({ 
+                    embeds: [embed], 
+                    components: [row] 
+                });
+            });
         }
-        
 }

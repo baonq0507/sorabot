@@ -5,7 +5,6 @@ const Xsmb = require("./models/xsmb");
 const User = require("./models/user");
 const { formatNumber } = require("./common");
 const { Client, GatewayIntentBits, Collection, EmbedBuilder, Events, REST, Routes } = require("discord.js");
-// const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES] });
 
 const client = new Client({
     intents: [
@@ -48,32 +47,32 @@ const rest = new REST().setToken(TOKEN);
 	try {
         console.log('Đang lấy tất cả các lệnh...');
 
-        // // **Lấy tất cả lệnh toàn cầu**
-        // const globalCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
-        // console.log(`Tìm thấy ${globalCommands.length} lệnh toàn cầu.`);
+        // **Lấy tất cả lệnh toàn cầu**
+        const globalCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
+        console.log(`Tìm thấy ${globalCommands.length} lệnh toàn cầu.`);
 
-        // // Xóa tất cả lệnh toàn cầu
-        // for (const command of globalCommands) {
-        //     console.log(`Đang xóa lệnh toàn cầu: ${command.name} (${command.id})`);
-        //     await rest.delete(Routes.applicationCommand(CLIENT_ID, command.id));
-        // }
-        // console.log('Tất cả lệnh toàn cầu đã bị xóa!');
+        // Xóa tất cả lệnh toàn cầu
+        for (const command of globalCommands) {
+            console.log(`Đang xóa lệnh toàn cầu: ${command.name} (${command.id})`);
+            await rest.delete(Routes.applicationCommand(CLIENT_ID, command.id));
+        }
+        console.log('Tất cả lệnh toàn cầu đã bị xóa!');
 
-        // // **Lấy tất cả lệnh trong guild**
-        // if (GUILD_ID) {
-        //     const guildCommands = await rest.get(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID));
-        //     console.log(`Tìm thấy ${guildCommands.length} lệnh trong server ID: ${GUILD_ID}.`);
+        // **Lấy tất cả lệnh trong guild**
+        if (GUILD_ID) {
+            const guildCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
+            console.log(`Tìm thấy ${guildCommands.length} lệnh trong server ID: ${GUILD_ID}.`);
 
-        //     // Xóa tất cả lệnh trong guild
-        //     for (const command of guildCommands) {
-        //         console.log(`Đang xóa lệnh guild: ${command.name} (${command.id})`);
-        //         await rest.delete(Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, command.id));
-        //     }
-        //     console.log(`Tất cả lệnh trong server ID: ${GUILD_ID} đã bị xóa!`);
-        // }
+            // Xóa tất cả lệnh trong guild
+            for (const command of guildCommands) {
+                console.log(`Đang xóa lệnh guild: ${command.name} (${command.id})`);
+                await rest.delete(Routes.applicationCommand(CLIENT_ID, command.id));
+            }
+            console.log(`Tất cả lệnh trong server ID: ${GUILD_ID} đã bị xóa!`);
+        }
         
 		const data = await rest.put(
-			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+			Routes.applicationCommands(CLIENT_ID),
 			{ body: commands },
 		);
 
@@ -100,6 +99,15 @@ client.on(Events.InteractionCreate, async interaction => {
         });
     }
 });
+
+// client.on('guildCreate', async (guild) => {
+//     console.log(`Đã thêm vào server ${guild.name} (${guild.id})`);
+//     await rest.put(
+//         Routes.applicationGuildCommands(CLIENT_ID, guild.id),
+//         { body: commands },
+//     );
+// });
+
 try {
     client.login(TOKEN);
 } catch(error) {

@@ -17,7 +17,7 @@ module.exports = {
                         ]
 
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -26,7 +26,7 @@ module.exports = {
                             'Đơn thuốc bạn kê không hợp lý, bệnh nhân phản hồi',
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -37,7 +37,7 @@ module.exports = {
                             'Bệnh nhân rất hài lòng với bạn'
                         ]
                     },
-                    reward: 10000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -48,7 +48,7 @@ module.exports = {
                             'Tư vấn rất hợp lý, bạn đúng là 1 bác sĩ tai hại'
                         ]
                     },
-                    reward: 2000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -60,7 +60,7 @@ module.exports = {
                             'Bạn đa tiêm nhầm vaccine của chó cho bệnh nhân'
                         ]
                     },
-                    reward: 1500
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 }
             ],
             emoji: '👨‍⚕️',
@@ -79,7 +79,7 @@ module.exports = {
                             'Bạn dạy học rất hợp lý, học sinh rất hài lòng'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -90,7 +90,7 @@ module.exports = {
                             'Bạn chấm điểm học sinh như cc'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍🏫',
@@ -109,7 +109,7 @@ module.exports = {
                             'Code bạn viết rất hợp lý, bạn đúng là 1 kỹ sư phần mềm tai hại'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -120,7 +120,7 @@ module.exports = {
                             'Code bạn kiểm tra rất hợp lý, bạn đúng là 1 kỹ sư phần mềm tai hại'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍💻',
@@ -142,7 +142,7 @@ module.exports = {
                             'Bạn nấu ăn ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -156,7 +156,7 @@ module.exports = {
                             'Thức ăn bạn chế biến ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -168,7 +168,7 @@ module.exports = {
                             'Bạn đa phục vụ khách hàng nhầm thức ăn của chó cho khách hàng'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍🍳',
@@ -190,7 +190,7 @@ module.exports = {
                             'Xe bạn sửa ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -204,7 +204,7 @@ module.exports = {
                             'Xe bạn bảo dưỡng ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -218,7 +218,7 @@ module.exports = {
                             'Xe bạn bảo trì ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍🔧',
@@ -241,7 +241,7 @@ module.exports = {
                             'Bạn nhập liệu ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -255,7 +255,7 @@ module.exports = {
                             'Máy in bạn sửa ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍💼',
@@ -277,7 +277,7 @@ module.exports = {
                             'Bạn sửa điện ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -291,7 +291,7 @@ module.exports = {
                             'Bạn bảo trì điện ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -305,7 +305,7 @@ module.exports = {
                             'Bạn lắp đặt điện ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -319,7 +319,7 @@ module.exports = {
                             'Bạn kiểm tra điện ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 }
             ],
             emoji: '⚡',
@@ -341,7 +341,7 @@ module.exports = {
                             'Bạn xây dựng ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -355,7 +355,7 @@ module.exports = {
                             'Bạn bảo trì nhà ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -369,7 +369,7 @@ module.exports = {
                             'Bạn lắp đặt nhà ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👷‍♂️',
@@ -391,7 +391,7 @@ module.exports = {
                             'Bạn bán hàng ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -405,7 +405,7 @@ module.exports = {
                             'Bạn chăm sóc khách hàng ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -419,7 +419,7 @@ module.exports = {
                             'Bạn tư vấn sản phẩm ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '👨‍💼',
@@ -441,7 +441,7 @@ module.exports = {
                             'Bạn chở khách ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -455,7 +455,7 @@ module.exports = {
                             'Bạn chở hàng ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
@@ -469,7 +469,7 @@ module.exports = {
                             'Bạn bảo trì xe ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
             ],
             emoji: '🚗',
@@ -491,7 +491,7 @@ module.exports = {
                             'Bạn thiết kế ngon quá bạn ơi!'
                         ]
                     },
-                    reward: Math.floor(Math.random() * (50000000 - 50000 + 1)) + 50000
+                    reward: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
                 },
                 {
                     task: {
