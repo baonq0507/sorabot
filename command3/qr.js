@@ -58,9 +58,9 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor("Blue")
-            .setTitle('Thông tin số tài khoản của Sora')
+            .setTitle(`Thông tin số tài khoản của ${interaction.user.displayName}`)
             .addFields(
-                { name: 'Chủ tài khoản', value: accountName || 'Trần Thị Vân' },
+                { name: 'Chủ tài khoản', value: accountName || `${interaction.user.displayName}` },
                 { name: 'Số tài khoản', value: accountNo || '1019908009' },
                 { name: 'Ngân hàng', value: bank?.name || 'Vietcombank' }
             )
