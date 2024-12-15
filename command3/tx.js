@@ -128,7 +128,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle(`Kết quả: ${result} ${dice1DotSymbol} ${dice2DotSymbol} ${dice3DotSymbol}`)
             .setColor(result === type ? "Green" : "Red")
-            .setDescription(`Bạn đã ${result === type ? "thắng" : "thua"} ${result === type ? '+' : '-'} ${amount} 💸 💸 💸`)
+            .setDescription(`Bạn đã ${result === type ? "thắng" : "thua"} ${result === type ? '+' : '-'} ${formatNumber(amount)} 💸 💸 💸`)
             .addFields(
                 { name: '💵 Số tiền sau khi cược:', value: `${formatNumber(user.balance)}` },
             )
