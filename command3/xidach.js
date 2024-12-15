@@ -42,7 +42,7 @@ module.exports = {
             .setFooter({ text: `💰 Số tiền: ${formatNumber(amount)}`, iconURL: interaction.user.displayAvatarURL() });
 
         let components = [];
-        if (playerScore < 21 && playerScore < botScore) {
+        if (playerScore < 21 && playerScore < botScore && botScore < 21) {
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
@@ -80,6 +80,7 @@ module.exports = {
                 { name: '💰 Số tiền', value: `💰 Thua -${formatNumber(amount)}`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
+            return;
         } else if (botScore > 21) {
             embed.setDescription(`🎉 ${interaction.user.displayName} thắng! Bot quá 21 điểm`);
             embed.setColor('Green');
@@ -91,6 +92,7 @@ module.exports = {
                 { name: '💰 Số tiền', value: `💰 Thắng +${formatNumber(amount * 2)}`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
+            return;
         } else if (playerScore === botScore) {
             embed.setDescription('🤝 Hòa! Cả hai đều bằng điểm');
             embed.setColor('Green');
@@ -102,6 +104,7 @@ module.exports = {
                 { name: '💰 Số tiền', value: `💰 Hòa +0`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
+            return;
         } else if (playerScore > botScore) {
             embed.setDescription(`🎉 ${interaction.user.displayName} thắng! Điểm cao hơn bot`);
             embed.setColor('Green');
@@ -113,6 +116,7 @@ module.exports = {
                 { name: '💰 Số tiền', value: `💰 Thắng +${formatNumber(amount * 2)}`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
+            return;
         } else {
             embed.setDescription(`❌ ${interaction.user.displayName} thua! Điểm thấp hơn bot`);
             embed.setColor('Red');
@@ -122,6 +126,7 @@ module.exports = {
                 { name: '💰 Số tiền', value: `💰 Thua -${formatNumber(amount)}`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
+            return;
         }
 
         const message = await interaction.reply({ embeds: [embed], components, fetchReply: true });
