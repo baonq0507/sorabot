@@ -81,8 +81,19 @@ module.exports = {
             );
             await interaction.reply({ embeds: [embed] });
             return;
-        } else if(playerScore > botScore) {
-            embed.setDescription(`🎉 ${interaction.user.displayName} thắng!`);
+        } else if(playerScore > 21 && botScore > 21) {
+            embed.setDescription(`❌ ${interaction.user.displayName} thua! Quá 21 điểm`);
+            embed.setColor('Red');
+            embed.setFields(
+                { name: `👤 ${interaction.user.displayName}`, value: `🎯 ${playerScore}`, inline: true },
+                { name: `🤖 ${APP_NAME}`, value: `🎯 ${botScore}`, inline: true },
+                { name: '💰 Số tiền', value: `💰 Thua -${formatNumber(amount)}`, inline: true },
+                { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
+            );
+            await interaction.reply({ embeds: [embed] });
+            return;
+        } else if (playerScore < 21 && botScore > 21) {
+            embed.setDescription(`🎉 ${interaction.user.displayName} thắng! Bot quá 21 điểm`);
             embed.setColor('Green');
             user.balance += amount * 2;
             await user.save();
@@ -90,17 +101,6 @@ module.exports = {
                 { name: `👤 ${interaction.user.displayName}`, value: `🎯 ${playerScore}`, inline: true },
                 { name: `🤖 ${APP_NAME}`, value: `🎯 ${botScore}`, inline: true },
                 { name: '💰 Số tiền', value: `💰 Thắng +${formatNumber(amount * 2)}`, inline: true },
-                { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
-            );
-            await interaction.reply({ embeds: [embed] });
-            return;
-        } else if (playerScore > 21 && botScore < 21) {
-            embed.setDescription(`❌ ${interaction.user.displayName} thua! Quá 21 điểm`);
-            embed.setColor('Red');
-            embed.setFields(
-                { name: `👤 ${interaction.user.displayName}`, value: `🎯 ${playerScore}`, inline: true },
-                { name: `🤖 ${APP_NAME}`, value: `🎯 ${botScore}`, inline: true },
-                { name: '💰 Số tiền', value: `💰 Thua -${formatNumber(amount)}`, inline: true },
                 { name: '💰 Số tiền còn lại', value: `💰 ${user.balance}`, inline: true }
             );
             await interaction.reply({ embeds: [embed] });
