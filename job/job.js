@@ -821,7 +821,7 @@ module.exports = {
                             'Bạn stream không hợp lý, bị phản hồi',
                         ]
                     },
-                    reward: Math.floor(Math.random() * 50001) + 50000
+                    reward: Math.floor(Math.random() * 50001) + 5000000
                 },
                 {
                     task: {
@@ -830,7 +830,7 @@ module.exports = {
                             'Bạn chỉnh sửa video không hợp lý, bị phản hồi',
                         ]
                     },
-                    reward: Math.floor(Math.random() * 50001) + 50000
+                    reward: Math.floor(Math.random() * 50001) + 5000000
                 },
                 {
                     task: {
@@ -839,7 +839,7 @@ module.exports = {
                             'Bạn tạo nội dung không hợp lý, bị phản hồi',
                         ]
                     },
-                    reward: Math.floor(Math.random() * 50001) + 50000
+                    reward: Math.floor(Math.random() * 50001) + 5000000
                 },
                 {
                     task: {
@@ -848,7 +848,7 @@ module.exports = {
                             'Bạn chăm sóc viewer không hợp lý, bị phản hồi',
                         ]
                     },
-                    reward: Math.floor(Math.random() * 50001) + 50000
+                    reward: Math.floor(Math.random() * 50001) + 5000000
                 },
 
             ],
