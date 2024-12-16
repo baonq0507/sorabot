@@ -115,7 +115,7 @@ client.on('guildMemberRemove', (member) => {
     if (channel) {
       const embed = new EmbedBuilder()
         .setTitle('👋 Tạm biệt thành viên')
-        .setDescription(`${member.user.tag} đã rời khỏi server 😢`)
+        .setDescription(`<@${member.user.id}> đã rời khỏi server 😢`)
         .setColor('#FF0000')
         .setThumbnail(member.user.displayAvatarURL())
         .setTimestamp();
