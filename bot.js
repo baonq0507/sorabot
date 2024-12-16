@@ -1,6 +1,6 @@
 require("dotenv").config();
 require('./database/mongodb');
-const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL, CHANNEL_ID_EVENT, CLIENT_ID, GUILD_ID } = process.env;
+const { TOKEN, PREFIX, TIMEOUT, CHANNEL_ID_XS, THUMBNAIL, CHANNEL_ID_EVENT, CLIENT_ID, GUILD_ID, CHANNEL_ID_EVENT_GOODBYE } = process.env;
 const Xsmb = require("./models/xsmb");
 const User = require("./models/user");
 const { formatNumber } = require("./common");
@@ -107,6 +107,21 @@ client.on(Events.InteractionCreate, async interaction => {
 //         { body: commands },
 //     );
 // });
+
+client.on('guildMemberRemove', (member) => {
+    const guild = member.guild;
+    const channel = guild.channels.cache.get(CHANNEL_ID_EVENT_GOODBYE);
+    
+    if (channel) {
+      const embed = new EmbedBuilder()
+        .setTitle('👋 Tạm biệt thành viên')
+        .setDescription(`${member.user.tag} đã rời khỏi server 😢`)
+        .setColor('#FF0000')
+        .setThumbnail(member.user.displayAvatarURL())
+        .setTimestamp();
+      channel.send({ embeds: [embed] });
+    }
+  });
 
 try {
     client.login(TOKEN);
