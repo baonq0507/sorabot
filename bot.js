@@ -60,19 +60,19 @@ const rest = new REST().setToken(TOKEN);
 
         // **Lấy tất cả lệnh trong guild**
         if (GUILD_ID) {
-            const guildCommands = await rest.get(Routes.applicationCommands(CLIENT_ID));
+            const guildCommands = await rest.get(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID));
             console.log(`Tìm thấy ${guildCommands.length} lệnh trong server ID: ${GUILD_ID}.`);
 
             // Xóa tất cả lệnh trong guild
             for (const command of guildCommands) {
                 console.log(`Đang xóa lệnh guild: ${command.name} (${command.id})`);
-                await rest.delete(Routes.applicationCommand(CLIENT_ID, command.id));
+                await rest.delete(Routes.applicationGuildCommand(CLIENT_ID, GUILD_ID, command.id));
             }
             console.log(`Tất cả lệnh trong server ID: ${GUILD_ID} đã bị xóa!`);
         }
         
 		const data = await rest.put(
-			Routes.applicationCommands(CLIENT_ID),
+			Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
 			{ body: commands },
 		);
 
